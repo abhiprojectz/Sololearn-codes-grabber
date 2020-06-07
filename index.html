@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title>Sololearn code Downloader</title>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+         <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+         <script src="https://kit.fontawesome.com/97cc306c60.js" crossorigin="anonymous"></script>
+
+         
+
+         <link rel="stylesheet" href=".css/style.css">
+
+    </head>
+
+    <body>
+
+    
+
+    <div id="loader">
+
+          
+
+          <div id="space">
+
+              <p style="text-align:center;font-family:Passion one;font-size:22px;color:#fff;">Loading!</p>
+
+          </div>
+
+          <svg width="44" height="44" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
+
+<g fill="none" fill-rule="evenodd" stroke-width="2">
+
+<circle cx="22" cy="22" r="19.4407">
+
+<animate attributeName="r" begin="0s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"></animate>
+
+<animate attributeName="stroke-opacity" begin="0s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"></animate>
+
+</circle>
+
+<circle cx="22" cy="22" r="11.526">
+
+<animate attributeName="r" begin="-0.9s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"></animate>
+
+<animate attributeName="stroke-opacity" begin="-0.9s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"></animate>
+
+</circle>
+
+</g>
+
+</svg>
+
+        
+
+      </div>
+
+      
+
+      
+
+      <div id="super"/>
+
+      
+
+    
+
+    <!-- /////// ----Header---  /////// -->
+
+            <div id="main" class="card">
+
+            
+
+                <h1>Hi Welcome! <img class="av" src="https://raw.githubusercontent.com/abhiprojectz/Sololearn-codes-grabber/e05e432d9b8f4b851c7d05f81e2b2ff59dec76e1/mf-avatar.svg">  to Sololearn source code downloader.</h1>
+
+                
+
+                
+
+                
+
+                
+
+                <p>With Solo codes downloader you can directly save the source code into your phone or pcs by just a click in a separate files</p>
+
+                
+
+                <p>This is handy tool , its saves our time in copy-pasting the codes when we wanna edit into other <strong>IDE</strong>. </p>
+
+                
+
+                <div id="lii">
+
+            <p>Fill in your code url.</p>
+
+                <input id="link" placeholder="ur code url..." required/>
+
+            </div>
+
+            
+
+               <div class="box">
+
+               <p>Here's a preview of your code! </p>
+
+               <br /><br />
+
+   <h1 id="title"></h1>
+
+   <p id="lang"></p>
+
+   <br /><br />
+
+    <p id="code"></p>
+
+    </div>
+
+            
+
+            
+
+            <button id="save" class="res">Next!</button>
+
+        
+
+                   <button id="down" class="res">Click me to download!</button>
+
+        
+
+                
+
+                
+
+                <h3 class="made_by"><a href="https://github.com/abhiprojectz">Made By Abhiprojectz</a></h3>
+
+            </div>
+
+            
+
+             <!-- /////// ----Main Divs---  /////// -->
+
+   
+
+    <div id="codeapp"></div>
+
+    
+
+        
+
+    </body>
+
+    
+
+          
+
+     <script>
+
+    $("#super").hide();
+
+    $(".box").hide()
+
+    $("#down").hide();
+
+        setTimeout(loader, 3000);
+
+      
+
+      
+
+      function loader() {
+
+          
+
+          $("#loader").slideUp();
+
+          $("#super").slideUp();
+
+          $("#super").show();
+
+          
+
+      }
+
+      
+
+    </script>
+
+    
+
+    <script>
+
+        
+
+        
+
+        //// Cors ////
+
+        
+
+         var cors = "https://cors-anywhere.herokuapp.com/";
+
+        
+
+        //// check link ////
+
+        (function(){
+
+            
+
+            let params = new URLSearchParams(document.location.search.substring(1));
+
+            
+
+let link = params.get("q");
+
+            
+
+            
+
+            if(!link){
+
+                
+
+                
+
+            } else {
+
+            
+
+            $("#main").hide();
+
+        $("#loader").slideDown()
+
+        
+
+            
+
+            var url = cors + link;
+
+                
+
+                fetch(url).then(function(response) {
+
+  if(response.ok) {
+
+    response.text().then(function(data) {
+
+        
+
+        
+
+        // Main function 
+
+       
+
+        main(data);
+
+    
+
+    
+
+    });
+
+  } else {
+
+    console.log('Network request failed with response ' + response.status + ': ' + response.statusText);
+
+  }
+
+})
+
+                
+
+                
+
+            }
+
+            
+
+        })()
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        $("#save").click(function (){
+
+        
+
+            
+
+            var link = $("#link").val();
+
+            
+
+            if(!link){
+
+                
+
+                alert("Please fill in a valid link then try again!")
+
+            } else {
+
+            
+
+             $("#main").hide();
+
+        $("#loader").slideDown()
+
+        
+
+                
+
+                 var url = cors + link;
+
+    
+
+     fetch(url).then(function(response) {
+
+  if(response.ok) {
+
+    response.text().then(function(data) {
+
+        
+
+        
+
+        // Main function 
+
+       
+
+        main(data);
+
+        $("#loader").show()
+
+    
+
+    });
+
+  } else {
+
+    console.log('Network request failed with response ' + response.status + ': ' + response.statusText);
+
+  }
+
+})
+
+            }
+
+        })
+
+        
+
+        
+
+        
+
+        $.fn.line = function(text){
+
+    this.text(text);
+
+    this.html(this.html().replace(/\n/g,'<br/>'));
+
+    return this;
+
+}
+
+function main(data) {
+
+        $("#loader").slideUp()
+
+    $("#main").show();
+
+      $("#lii").hide();
+
+    $(".box").show("slow");
+
+    
+
+    
+
+   $("#codeapp").html(data);
+
+   
+
+   var html = $("#codeapp").html();
+
+   
+
+   
+
+   
+
+ var code =  $("#codeapp form :input[id=Code]").val();
+
+ 
+
+ var csscode = $("#codeapp form :input[id=CssCode]").val();
+
+ 
+
+ 
+
+ var jscode = $("#codeapp form :input[id=JsCode]").val();
+
+ 
+
+ var lang = $("#codeapp form :input[id=Language]").val();
+
+ 
+
+ var name = $("#codeapp .codeName").text();
+
+ 
+
+ 
+
+$("#title").text(name)
+
+$("#lang").text(lang)
+
+if(lang === "web"){
+
+    
+
+    $("#pre").html("<b>" + lang + " </b> Code. <br /><br />");
+
+$("#code").line("HTML CODE: \n \n " + code + "\n \n CSS CODE: \n \n "+ csscode + "\n \n JS CODE: \n \n "+ jscode);
+
+    
+
+} else {
+
+$("#pre").html("<b>" + lang + " </b> Code. <br /><br />");
+
+$("#code").text(code);
+
+}
+
+$("#down").addClass("shake");
+
+$("#down").show()
+
+$("#save").slideUp()
+
+        }
+
+        
+
+        
+
+        function download(filename, elId, mimeType) {
+
+    var elHtml = document.getElementById(elId).innerHTML;
+
+    var link = document.createElement('a');
+
+    mimeType = mimeType || 'text/plain';
+
+    link.setAttribute('download', filename);
+
+    link.setAttribute('href', 'data:' + mimeType  +  ';charset=utf-8,' + encodeURIComponent(elHtml));
+
+    link.click(); 
+
+}
+
+$('#down').click(function(){
+
+        var fileName = $("#title").text()
+
+    download(fileName, 'code','text/html');
+
+});
+
+    </script>
+
+</html>
